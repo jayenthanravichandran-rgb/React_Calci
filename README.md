@@ -1,7 +1,7 @@
 # Ex04 Simple Calculator - React Project
 ## Date:14-03-2026
-## Name : 
-## Reg No :
+## Name : JAYENTHAN R
+## Reg No :212225240057
 
 ## AIM
 To  develop a Simple Calculator using React.js with clean and responsive design, ensuring a smooth user experience across different screen sizes.
@@ -48,10 +48,294 @@ Deploy the website.
 Upload to GitHub Pages for free hosting.
 
 ## PROGRAM
+.calculator {
+    width: 300px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 10px;
+    background: #222;
+}
 
+.calculator input {
+    width: 100%;
+    height: 60px;
+    font-size: 25px;
+    text-align: right;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.buttons button {
+    height: 60px;
+    font-size: 20px;
+    cursor: pointer;
+}
+Calculator.jsx
+
+import { useState } from "react";
+import "./Calculator.css";
+
+function Calculator() {
+    const [display, setDisplay] = useState("");
+
+    const handleClick = (value) => {
+        setDisplay(display + value);
+    };
+
+    const clearDisplay = () => {
+        setDisplay("");
+    };
+
+    const calculate = () => {
+        try {
+            setDisplay(eval(display).toString());
+        } catch {
+            setDisplay("Error");
+        }
+    };
+
+    return (
+        <div className="calculator">
+            <input type="text" value={display} readOnly />
+
+            <div className="buttons">
+                <button onClick={clearDisplay}>C</button>
+                <button onClick={() => handleClick("/")}>/</button>
+                <button onClick={() => handleClick("*")}>*</button>
+                <button onClick={() => handleClick("-")}>-</button>
+
+                <button onClick={() => handleClick("7")}>7</button>
+                <button onClick={() => handleClick("8")}>8</button>
+                <button onClick={() => handleClick("9")}>9</button>
+                <button onClick={() => handleClick("+")}>+</button>
+
+                <button onClick={() => handleClick("4")}>4</button>
+                <button onClick={() => handleClick("5")}>5</button>
+                <button onClick={() => handleClick("6")}>6</button>
+                <button onClick={calculate}>=</button>
+
+                <button onClick={() => handleClick("1")}>1</button>
+                <button onClick={() => handleClick("2")}>2</button>
+                <button onClick={() => handleClick("3")}>3</button>
+                <button onClick={() => handleClick("0")}>0</button>
+            </div>
+        </div>
+    );
+}
+
+export default Calculator;
+app.css
+
+.counter {
+  font-size: 16px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: var(--accent);
+  background: var(--accent-bg);
+  border: 2px solid transparent;
+  transition: border-color 0.3s;
+  margin-bottom: 24px;
+
+  &:hover {
+    border-color: var(--accent-border);
+  }
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+}
+
+.hero {
+  position: relative;
+
+  .base,
+  .framework,
+  .vite {
+    inset-inline: 0;
+    margin: 0 auto;
+  }
+
+  .base {
+    width: 170px;
+    position: relative;
+    z-index: 0;
+  }
+
+  .framework,
+  .vite {
+    position: absolute;
+  }
+
+  .framework {
+    z-index: 1;
+    top: 34px;
+    height: 28px;
+    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
+      scale(1.4);
+  }
+
+  .vite {
+    z-index: 0;
+    top: 107px;
+    height: 26px;
+    width: auto;
+    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
+      scale(0.8);
+  }
+}
+
+#center {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  place-content: center;
+  place-items: center;
+  flex-grow: 1;
+
+  @media (max-width: 1024px) {
+    padding: 32px 20px 24px;
+    gap: 18px;
+  }
+}
+
+#next-steps {
+  display: flex;
+  border-top: 1px solid var(--border);
+  text-align: left;
+
+  & > div {
+    flex: 1 1 0;
+    padding: 32px;
+    @media (max-width: 1024px) {
+      padding: 24px 20px;
+    }
+  }
+
+  .icon {
+    margin-bottom: 16px;
+    width: 22px;
+    height: 22px;
+  }
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+#docs {
+  border-right: 1px solid var(--border);
+
+  @media (max-width: 1024px) {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+}
+
+#next-steps ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 8px;
+  margin: 32px 0 0;
+
+  .logo {
+    height: 18px;
+  }
+
+  a {
+    color: var(--text-h);
+    font-size: 16px;
+    border-radius: 6px;
+    background: var(--social-bg);
+    display: flex;
+    padding: 6px 12px;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    transition: box-shadow 0.3s;
+
+    &:hover {
+      box-shadow: var(--shadow);
+    }
+    .button-icon {
+      height: 18px;
+      width: 18px;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    margin-top: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    li {
+      flex: 1 1 calc(50% - 8px);
+    }
+
+    a {
+      width: 100%;
+      justify-content: center;
+      box-sizing: border-box;
+    }
+  }
+}
+
+#spacer {
+  height: 88px;
+  border-top: 1px solid var(--border);
+  @media (max-width: 1024px) {
+    height: 48px;
+  }
+}
+
+.ticks {
+  position: relative;
+  width: 100%;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: -4.5px;
+    border: 5px solid transparent;
+  }
+
+  &::before {
+    left: 0;
+    border-left-color: var(--border);
+  }
+  &::after {
+    right: 0;
+    border-right-color: var(--border);
+  }
+}
+app.jsx
+
+import Calculator from "./Calculator";
+
+function App() {
+    return (
+        <>
+            <h1>Simple Calculator</h1>
+            <Calculator />
+        </>
+    );
+}
+
+export default App;
 
 
 ## OUTPUT
+<img width="1168" height="681" alt="image" src="https://github.com/user-attachments/assets/a515f2ad-3e65-4438-b99c-1908318a2e20" />
+<img width="1155" height="713" alt="image" src="https://github.com/user-attachments/assets/98936213-70e4-4490-af61-241eeedc8cdc" />
+
 
 
 ## RESULT
